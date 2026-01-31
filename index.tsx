@@ -1,15 +1,15 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+// import App from './App'; // Temporarily disabled
 import './index.css';
+
+console.log("Starting application [DEBUG VERSION 3]...");
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
-
-console.log("Starting application [DEBUG VERSION 2]...");
 
 window.onerror = function (message, source, lineno, colno, error) {
   console.error("Global error:", message, "at", source, ":", lineno);
@@ -19,8 +19,13 @@ window.onerror = function (message, source, lineno, colno, error) {
   }
 };
 
+if (rootElement) {
+  rootElement.innerHTML = '<div style="color: lime; font-size: 24px;">JS EXECUTION SUCCESSFUL</div>';
+}
+
+/*
 try {
-  const root = ReactDOM.createRoot(rootElement);
+  const root = ReactDOM.createRoot(rootElement!);
   root.render(
     <React.StrictMode>
       <App />
@@ -29,8 +34,8 @@ try {
   console.log("Application mounted.");
 } catch (e) {
   console.error("Failed to mount application:", e);
-  const root = document.getElementById('root');
-  if (root) {
-    root.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
+  if (rootElement) {
+      rootElement.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
   }
 }
+*/
