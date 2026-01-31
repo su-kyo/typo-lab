@@ -18,24 +18,17 @@ window.onerror = function (message, source, lineno, colno, error) {
   }
 };
 
-if (rootElement) {
-  rootElement.innerHTML = '<div style="color: cyan; font-size: 24px;">IMPORT SUCCESSFUL (Rendering skipped)</div>';
-  console.log("App imported successfully:", App);
-}
-
-/*
 try {
-  const root = ReactDOM.createRoot(rootElement!);
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
-  console.log("Application mounted.");
+  console.log("Application mounted successfully.");
 } catch (e) {
   console.error("Failed to mount application:", e);
   if (rootElement) {
-      rootElement.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
+    rootElement.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
   }
 }
-*/

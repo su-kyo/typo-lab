@@ -3,7 +3,14 @@ import { GoogleGenAI } from "@google/genai";
 import { Tone } from "../types";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+let aiInstance: GoogleGenAI | null = null;
+
+const getAI = () => {
+  if (!aiInstance) {
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
 
 // Circuit breaker state to prevent spamming the API when rate limited
 let quarantineUntil = 0;
@@ -23,6 +30,7 @@ export const detectTone = async (text: string): Promise<Tone> => {
   }
 
   try {
+    const ai = getAI();
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `Analyze the tone of the following text and return exactly one word from this list: 'calm', 'playful', 'serious', 'intense'.
