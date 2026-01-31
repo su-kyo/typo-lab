@@ -18,17 +18,10 @@ window.onerror = function (message, source, lineno, colno, error) {
   }
 };
 
-try {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-  console.log("Application mounted successfully.");
-} catch (e) {
-  console.error("Failed to mount application:", e);
-  if (rootElement) {
-    rootElement.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
-  }
-}
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+console.log("Application mounted successfully.");

@@ -245,10 +245,7 @@ const App: React.FC = () => {
       {/* Aesthetic Grain */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-40"></div>
 
-      {/* Vercel Debug Overlay - remove after fixing */}
-      <div className="fixed bottom-0 right-0 p-2 bg-red-500 text-white text-xs z-[9999] pointer-events-none opacity-50">
-        VERCEL_DEBUG_MODE_ACTIVE
-      </div>
+
     </div>
   );
 };
