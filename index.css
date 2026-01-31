@@ -1,0 +1,54 @@
+:root {
+  --app-height: 100%;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: fixed; /* Prevent rubber banding on iOS */
+}
+#root {
+  height: 100%;
+}
+/* Hide scrollbar but allow scrolling if needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* Geometry flash shapes */
+.shape-calm { border-radius: 50%; border: 1px solid white; }
+.shape-serious { border-radius: 0; background: white; }
+.shape-intense { border-radius: 0; background: white; transform: scaleX(0.4) scaleY(1.2); }
+.shape-playful { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; background: white; }
+
+@keyframes flash-in {
+  0% { opacity: 0; transform: scale(0.8) translate(-50%, -50%); }
+  20% { opacity: 0.18; transform: scale(1.1) translate(-50%, -50%); }
+  100% { opacity: 0; transform: scale(1.2) translate(-50%, -50%); }
+}
+.geometry-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  pointer-events: none;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.geometry-flash.active {
+  animation: flash-in 0.25s ease-out forwards;
+}
+
+/* Mobile optimization for input focus */
+textarea {
+  font-size: 16px !important; /* Prevents iOS auto-zoom */
+}

@@ -1,0 +1,5 @@
+{
+  "name": "typolab",
+  "description": "An interactive typography lab where text tone dictates font selection, and mouse movement modulates visual parameters in real-time.",
+  "requestFramePermissions": []
+}
