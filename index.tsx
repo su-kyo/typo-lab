@@ -9,7 +9,16 @@ if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
 
-console.log("Starting application...");
+console.log("Starting application [DEBUG VERSION 2]...");
+
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error("Global error:", message, "at", source, ":", lineno);
+  const root = document.getElementById('root');
+  if (root) {
+    root.innerHTML += `<br/><div style="color: red; background: black;">CRASH: ${message}</div>`;
+  }
+};
+
 try {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
@@ -20,4 +29,8 @@ try {
   console.log("Application mounted.");
 } catch (e) {
   console.error("Failed to mount application:", e);
+  const root = document.getElementById('root');
+  if (root) {
+    root.innerHTML += `<br/><div style="color: red;">MOUNT ERROR: ${e}</div>`;
+  }
 }
