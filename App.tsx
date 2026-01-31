@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [isLocked, setIsLocked] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [characters, setCharacters] = useState<CharacterData[]>([]);
-  
+
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
@@ -63,14 +63,14 @@ const App: React.FC = () => {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       const p = particlesRef.current;
       for (let i = p.length - 1; i >= 0; i--) {
         const part = p[i];
         part.x += part.vx;
         part.y += part.vy;
         part.life -= 0.02;
-        
+
         if (part.life <= 0) {
           p.splice(i, 1);
           continue;
@@ -124,11 +124,11 @@ const App: React.FC = () => {
   // Handle live typing with reconciliation
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
-    
+
     setCharacters(prev => {
       const nextChars: CharacterData[] = [];
       const newCharsArray = newText.split('');
-      
+
       newCharsArray.forEach((char, i) => {
         if (prev[i] && prev[i].char === char) {
           nextChars.push(prev[i]);
@@ -146,7 +146,7 @@ const App: React.FC = () => {
     setText(newText);
 
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    
+
     debounceRef.current = setTimeout(async () => {
       if (newText.trim().length >= 5) {
         const detected = await detectTone(newText);
@@ -185,13 +185,13 @@ const App: React.FC = () => {
           Tone: <span className="opacity-100 font-bold">{tone}</span>
         </div>
         <div className="flex gap-2">
-          <button 
+          <button
             onClick={() => setIsLocked(true)}
             className={`text-[8px] sm:text-[9px] uppercase tracking-[0.1em] sm:tracking-[0.2em] px-3 sm:px-4 py-1 sm:py-1.5 border transition-all ${isLocked ? 'bg-white text-black border-white' : 'border-white/10 opacity-50 hover:opacity-100 hover:border-white'}`}
           >
             Lock
           </button>
-          <button 
+          <button
             onClick={() => setIsLocked(false)}
             className={`text-[8px] sm:text-[9px] uppercase tracking-[0.1em] sm:tracking-[0.2em] px-3 sm:px-4 py-1 sm:py-1.5 border transition-all ${!isLocked ? 'bg-white text-black border-white' : 'border-white/10 opacity-50 hover:opacity-100 hover:border-white'}`}
           >
@@ -208,12 +208,12 @@ const App: React.FC = () => {
 
       {/* Text Stage - Centered but scrollable if too long */}
       <main className="flex-1 flex items-center justify-center p-6 sm:p-12 z-20 overflow-y-auto no-scrollbar">
-        <div 
+        <div
           className="w-full max-w-7xl text-center break-words select-none"
           style={dynamicStyles}
         >
           {characters.map((charData) => (
-            <Character 
+            <Character
               key={charData.id}
               char={charData.char}
               initialFont={charData.font}
@@ -244,6 +244,11 @@ const App: React.FC = () => {
 
       {/* Aesthetic Grain */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-40"></div>
+
+      {/* Vercel Debug Overlay - remove after fixing */}
+      <div className="fixed bottom-0 right-0 p-2 bg-red-500 text-white text-xs z-[9999] pointer-events-none opacity-50">
+        VERCEL_DEBUG_MODE_ACTIVE
+      </div>
     </div>
   );
 };
