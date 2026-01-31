@@ -1,7 +1,6 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './App'; // Temporarily disabled
+import App from './App'; // Import restored
 import './index.css';
 
 console.log("Starting application [DEBUG VERSION 3]...");
@@ -20,7 +19,8 @@ window.onerror = function (message, source, lineno, colno, error) {
 };
 
 if (rootElement) {
-  rootElement.innerHTML = '<div style="color: lime; font-size: 24px;">JS EXECUTION SUCCESSFUL</div>';
+  rootElement.innerHTML = '<div style="color: cyan; font-size: 24px;">IMPORT SUCCESSFUL (Rendering skipped)</div>';
+  console.log("App imported successfully:", App);
 }
 
 /*
